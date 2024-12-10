@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-function Timer(){
+function Timer({on, setOn}){
     const [timeLeft, setTimeLeft] = useState(5)
 
     useEffect(() => {
       function gameTimer() {
-        if (timeLeft === 0) {
-          clearInterval(timer);
-          //checkLoss();
-        } else {
+        
+        if (timeLeft > 0 && on){
           setTimeLeft(timeLeft-1);
+        }
+        
+        if (timeLeft === 0 && on) {
+          clearInterval(timer);
+          setOn(false)
         }
   
       }

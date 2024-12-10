@@ -14,8 +14,11 @@ function Game() {
     currSequence: initialSequence,
     currSequenceIndex: 0,
     playerSequence: [],
-    wrongCount: 0
+    wrongCount: 0,
+    isGameOver: false,
   })
+
+  const [timerIsRunning, setTimeIsRunning] = useState(true);
 
   function makeNumButtons() {  
     return intitialBoard.map((el, i) => {
@@ -41,18 +44,38 @@ function Game() {
         currSequenceIndex: state.currSequenceIndex + 1, 
         playerSequence: [...state.playerSequence, input]
       });
+      e.target.disabled = true;
     } else {
-      console.log(`else block HIT with input ${input}`)
-      console.log(currSequence[currSequenceIndex])
+      setState({
+        ...state,
+        wrongCount: state.wrongCount + 1
+      })
+    }
+  }
+
+  function checkEndgame(){
+    if (state.wrongCount > 2 && timerIsRunning) {
+      console.log("3 Xs! game over!")
+      setTimeIsRunning(false);
+    }
+
+    if (!timerIsRunning && state.wrongCount < 3) {
+      console.log("time up! game over!")
     }
   }
   
+  useEffect(() => {
+    checkEndgame();
+  }, [timerIsRunning, state.wrongCount])
 
   return (
     <section id="game-container">
       <div id="game-stats">
-        <Timer />
-        <p>wrong count: <span id="wrong-count"></span></p>
+        <Timer 
+          on={timerIsRunning} 
+          setOn={setTimeIsRunning}
+        />
+        <p>wrong count: <span id="wrong-count">{state.wrongCount}</span></p>
         <p><a href="./">Reset Game</a></p>
       </div>
       <Sequence currSequence={state.currSequence} />
