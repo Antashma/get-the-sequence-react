@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Timer from './Timer';
 import Sequence from './Sequence';
+import Message from "./Message";
 import { scrambleArr, createSequence } from '../helpers';
 
 
@@ -16,6 +17,7 @@ function Game() {
     playerSequence: [],
     wrongCount: 0,
     isGameOver: false,
+    message: null
   })
 
   const [timerIsRunning, setTimeIsRunning] = useState(true);
@@ -28,6 +30,7 @@ function Game() {
           id={`btn${el}`}
           onClick={checkInput}
           className='num-btn'
+          disabled={state.isGameOver}
         >
             {el}
         </button>
@@ -57,10 +60,20 @@ function Game() {
     if (state.wrongCount > 2 && timerIsRunning) {
       console.log("3 Xs! game over!")
       setTimeIsRunning(false);
+      setState({
+        ...state,
+        isGameOver: true,
+        message: "3 Xs! game over!"
+      })
     }
 
     if (!timerIsRunning && state.wrongCount < 3) {
       console.log("time up! game over!")
+      setState({
+        ...state,
+        isGameOver: true,
+        message: "time up! game over!"
+      })
     }
   }
   
@@ -79,6 +92,7 @@ function Game() {
         <p><a href="./">Reset Game</a></p>
       </div>
       <Sequence currSequence={state.currSequence} />
+      {state.message && <Message message={state.message} />}
       <div id="button-container">
         {makeNumButtons()}
       </div>

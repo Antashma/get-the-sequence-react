@@ -7,7 +7,7 @@ function Sequence({ currSequence }) {
     } 
     
     return (
-        <p id="message">
+        <p id="sequence">
             {displaySequence()}
         </p>
     )

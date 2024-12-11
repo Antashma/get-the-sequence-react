@@ -54,7 +54,7 @@ footer {
   font-weight: bold;
 }
 
-#message {
+#sequence {
   font-size: 4rem;
   font-weight: bold;
   text-align: center;
@@ -66,16 +66,17 @@ footer {
 
 }
 
-#message.loss-text {
-  background-color: transparent;
-  color:black;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-#message.win-text {
-  background-color: transparent;
-  color:black;
-  font-family: Arial, Helvetica, sans-serif;
+#message {
+  font-size: 4rem;
+  font-weight: bold;
+  text-align: center;
+  padding:5px;
+  background-color: turquoise;
+  color: whitesmoke;
+  font-family: 'Princess Sofia', cursive;
+  position: absolute;
+  top:35vh;
+  width:100%;
 }
 
 #button-container {
