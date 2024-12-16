@@ -24,13 +24,19 @@ footer {
   margin-top: 10px;
 }
 
+#app {
+  max-width: 500px;
+  min-width: 350px;
+  margin: 0 auto;
+
+}
+
 #container {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-width: 500px;
-  min-width: 350px;
-  margin: 0 auto;
+  /* max-width: 500px;
+  min-width: 350px; */
 
   background-color: white;
   padding: 0 20px;
@@ -75,8 +81,10 @@ footer {
   color: whitesmoke;
   font-family: 'Princess Sofia', cursive;
   position: absolute;
-  top:35vh;
+  top:315px;
   width:100%;
+  min-width: 350px;
+  max-width: 500px;
 }
 
 #button-container {
@@ -126,4 +134,9 @@ footer {
 
 .hide {
   display: none;
+}
+
+#wrong-count {
+  color: palevioletred;
+  font-weight: bold;
 }

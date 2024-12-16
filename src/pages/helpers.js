@@ -55,9 +55,14 @@ function scrambleArr(arr){
     return newArr;
 }
 
+function checkIfCopyArr(originalArr, potentialCopyArr){ 
+    return originalArr.join("") === potentialCopyArr.join("");
+}
+
 
 
 export {
     scrambleArr,
-    createSequence
+    createSequence,
+    checkIfCopyArr
 }

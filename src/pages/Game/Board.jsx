@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Timer from './Timer';
 import Sequence from './Sequence';
 import Message from "./Message";
-import { scrambleArr, createSequence } from '../helpers';
+import { scrambleArr, createSequence, checkIfCopyArr } from '../helpers';
 
 
 const initialSequence = createSequence();
@@ -67,7 +67,7 @@ function Game() {
       })
     }
 
-    if (!timerIsRunning && state.wrongCount < 3) {
+    if (!timerIsRunning && state.wrongCount < 3 && state.playerSequence.length < state.currSequence.length) {
       console.log("time up! game over!")
       setState({
         ...state,
@@ -75,11 +75,20 @@ function Game() {
         message: "time up! game over!"
       })
     }
+
+    if (timerIsRunning && state.wrongCount < 3 && checkIfCopyArr(state.currSequence,state.playerSequence)){
+      setTimeIsRunning(false)
+      setState({
+        ...state,
+        isGameOver: true,
+        message: "You win!"
+      })
+    }
   }
   
   useEffect(() => {
     checkEndgame();
-  }, [timerIsRunning, state.wrongCount])
+  }, [timerIsRunning, state.wrongCount, state.playerSequence.length])
 
   return (
     <section id="game-container">
